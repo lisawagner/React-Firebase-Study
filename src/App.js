@@ -5,9 +5,9 @@ import Title from './components/Title'
 function App() {
   const [showEvents, setShowEvents] = useState(true)
   const [events, setEvents] = useState([
-    {title: "mario's birthday bash", id: 1},
-    {title: "bowser's live stream", id: 2},
-    {title: "race on moo moo farm", id: 3}
+    {title: "The Last Wish", date: 1993, id: 1},
+    {title: "Sword of Destiny", date: 1992, id: 2},
+    {title: "Blood of Elves", date: 1994, id: 3}
   ])
 
   const handleClick = (id) => {
@@ -33,7 +33,7 @@ function App() {
       {showEvents && events.map((event, index) => (
         <div key={event.id}>
           <h2>{index} - {event.title}</h2>
-          <button onClick={() => handleClick(event.id)}>delete event</button>
+          <button onClick={() => handleClick(event.id)}>Delete Event</button>
         </div>
       ))}
     </div>

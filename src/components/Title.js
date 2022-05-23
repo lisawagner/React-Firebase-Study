@@ -1,9 +1,11 @@
+import './titleStyles.css'
+
 export default function Title() {
   return (
     <div>
-      <h1 className="title">Mario Kingdom Events</h1>
+      <h1 className="title">The Witcher Timeline</h1>
       <br />
-      <h2 className="subtitle">All the latest events in mario kingdom</h2>
+      <h2 className="subtitle">Everything in Chronological Order</h2>
     </div>
   )
 }
