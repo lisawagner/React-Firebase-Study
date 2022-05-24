@@ -2,17 +2,24 @@ import './App.css'
 import React, { useState } from 'react'
 import Title from './components/Title/Title'
 import Modal from './components/Modal/Modal'
+import EventList from './components/EventList/EventList'
+import EventForm from './components/EventForm/EventForm'
 
 function App() {
   const [showModal, setShowModal] = useState(false)
   const [showEvents, setShowEvents] = useState(true)
   const [events, setEvents] = useState([
-    {title: "The Last Wish", date: 1993, id: 1},
-    {title: "Sword of Destiny", date: 1992, id: 2},
-    {title: "Blood of Elves", date: 1994, id: 3}
+    // {title: "The Last Wish", date: 1993, id: 1},
+    // {title: "Sword of Destiny", date: 1992, id: 2},
+    // {title: "Blood of Elves", date: 1994, id: 3}
   ])
 
-  console.log(showModal);
+  const addEvent = (event) => {
+    setEvents((prevEvents) => {
+      return [...prevEvents, event]
+    })
+    setShowModal(false)
+  }
 
   const handleClick = (id) => {
     setEvents(prevEvents => {
@@ -21,9 +28,9 @@ function App() {
     console.log(id);
   }
 
-  const handleModal = () => {
-    setShowModal(!showModal)
-  }
+  // const handleModal = () => {
+  //   setShowModal(!showModal)
+  // }
 
   const subtitle = "Everything in Chronological Order"
 
@@ -31,11 +38,6 @@ function App() {
     <div className="App">
       <Title title="The Witcher Timeline" subtitle={subtitle} />
 
-      <div className='secret-btn'>
-        {/* <button onClick={handleModal}>Top Secret</button> */}
-        <button onClick={() => setShowModal(true)}>Top Secret</button>
-      </div>
-      
       {showEvents && (
         <div>
           <button onClick={() => setShowEvents(false)}>Hide Events</button>
@@ -46,20 +48,26 @@ function App() {
           <button onClick={() => setShowEvents(true)}>Show Events</button>
         </div>
       )}
-      {showEvents && events.map((event, index) => (
-        <React.Fragment key={event.id}>
-          <h2>{index} - {event.title}</h2>
-          <button onClick={() => handleClick(event.id)}>Delete Event</button>
-        </React.Fragment>
-      ))}
-      {showModal && <Modal handleModal={handleModal} >
-        <h2>The Witcher Season 3 - SPOILER ALERT!!</h2>
-        <p>Geralt and Yen Will Be .... Co-Parenting?!!</p>
-      </Modal>}
+      {showEvents && <EventList events={events} handleClick={handleClick} />}
+
+      {showModal && (
+        <Modal isSalesModal={true}>
+          <EventForm addEvent={addEvent} />
+        </Modal>
+        // <Modal handleModal={handleModal} isSalesModal={true} >
+        //   <h2>The Witcher Season 3 - SPOILER ALERT!!</h2>
+        //   <p>Geralt and Yen Will Be .... Co-Parenting?!!</p>
+        // </Modal>
+        )}
       {/* {showModal && <Modal handleModal={handleModal}>
         <h2>Terms and Conditions</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate veritatis, cupiditate, eos possimus eveniet dolorum aperiam officiis, vero repellendus modi maxime laborum nostrum libero! Quisquam, soluta, dicta quo placeat ad iste fuga possimus minima sunt dolores delectus doloribus eligendi. Ipsum illum dicta unde quae repellat?</p>
       </Modal>} */}
+
+<div className='secret-btn'>
+        {/* <button onClick={handleModal}>Top Secret</button> */}
+        <button onClick={() => setShowModal(true)}>Add New Event</button>
+      </div>
     </div>
   );
 }

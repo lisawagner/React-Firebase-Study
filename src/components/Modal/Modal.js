@@ -1,14 +1,18 @@
+import ReactDOM from 'react-dom'
 import React from 'react'
 import './modalStyles.css'
 
-export default function Modal({children, handleModal}) {
-  return (
+export default function Modal({children, isSalesModal }) {
+  return ReactDOM.createPortal((
     <div className="modal-backdrop">
-      <div className="modal">
+      <div className="modal"
+        style={{
+          border: "4px solid",
+          borderColor: isSalesModal ? "#ff4500" : "#555",
+          textAlign: "center"
+          }}>
         {children}
-        <button onClick={handleModal} >X</button>
       </div>
-      
     </div>
-  )
+  ), document.body)
 }
