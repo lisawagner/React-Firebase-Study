@@ -4,10 +4,12 @@ import './eventFormStyles.css'
 export default function EventForm({ addEvent }) {
   const [title, setTitle] = useState('')
   const [date, setDate] = useState('')
+  const [location, setLocation] = useState('saskatoon')
 
   const resetForm = () => {
     setTitle('')
     setDate('')
+    setLocation('saskatoon')
   }
 
   const handleSubmit = (e) => {
@@ -17,9 +19,9 @@ export default function EventForm({ addEvent }) {
     const event = {
       title: title,
       date: date,
+      location: location,
       id: Math.floor(Math.random() * 10000)
     }
-
     addEvent(event)
     resetForm()
   }
@@ -39,6 +41,15 @@ export default function EventForm({ addEvent }) {
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)} />
+      </label>
+      <label>
+        <span>Event location:</span>
+        <select onChange={(e) => setLocation(e.target.value)}>
+          <option value="saskatoon">Saskatoon</option>
+          <option value="burnaby">Burnaby</option>
+          <option value="quebec">Quebec</option>
+
+        </select>
       </label>
       <button>Submit</button>
       {/* <p>title - {title}, date - {date}</p>
